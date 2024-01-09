@@ -20,7 +20,7 @@ variable "aws_region" {
 variable "ami" {
    type        = string
    description = "Ubuntu AMI ID"
-   default     = "ami-007ef5e8a5e43d323"
+   default     = "ami-0bdb828fd58c52235"
 }
 
 variable "instance_type" {
