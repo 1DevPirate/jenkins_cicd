@@ -9,13 +9,13 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
-        AWS_DEFAULT_REGION    = 'us-east-1'
+        AWS_DEFAULT_REGION    = 'us-west-1'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/tekperfect/jenkins-terraform.git'
+                git branch: 'wesoblue', url: 'https://github.com/1DevPirate/jenkins_cicd.git'
             }
         }
         stage('Terraform init') {
