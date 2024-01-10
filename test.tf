@@ -14,3 +14,17 @@ resource "aws_subnet" "subnet-uno" {
   availability_zone = "us-east-1a"
 }
 
+# Setting up the security groups
+//security.tf
+resource "aws_security_group" "ingress-all-test" {
+name = "allow-all-sg"
+vpc_id = "${aws_vpc.blueteam.id}"
+ingress {
+    cidr_blocks = [
+      "10.10.10.0/24"
+    ]
+from_port = 22
+    to_port = 22
+    protocol = "tcp"
+  }
+}
