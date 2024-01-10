@@ -31,7 +31,7 @@ from_port = 22
 
 # Setting up an internet gateway
 //gateways.tf
-resource "aws_internet_gateway" "blueteam-gw" {
+resource "aws_internet_gateway" "test-env-gw" {
   vpc_id = "${aws_vpc.blueteam.id}"
 tags {
     Name = "blueteam-gw"
