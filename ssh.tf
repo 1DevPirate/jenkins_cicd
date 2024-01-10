@@ -29,16 +29,3 @@ from_port = 22
   }
 }
 
-# This will attach an elastic ip to generate a public ip
-resource "aws_vpc" "blueteam" {
-  cidr_block = "10.0.0.0/16"
-  enable_dns_hostnames = true
-  enable_dns_support = true
-  tags {
-    Name = "blueteam"
-  }
-}
-resource "aws_eip" "ip-blueteam" {
-  instance = "${aws_instance.test-ec2-instance.id}"
-  vpc      = true
-}
