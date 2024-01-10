@@ -21,10 +21,23 @@ name = "allow-all-sg"
 vpc_id = "${aws_vpc.blueteam.id}"
 ingress {
     cidr_blocks = [
-      "10.10.10.0/24","10.0.0.9/24"
+      "10.10.10.0/24"
     ]
 from_port = 22
     to_port = 22
     protocol = "tcp"
   }
+}
+
+# This will launch the EC2 instance
+//servers.tf
+resource "aws_instance" "wesoBlue" {
+  ami = "${var.ami_id}"
+  instance_type = "t2.micro"
+  key_name = "${var.ami_key_pair_name}"
+  security_groups = ["${aws_security_group.ingress-all-test.id}"]
+tags {
+    Name = "${var.ami_name}"
+  }
+subnet_id = "${aws_subnet.subnet-uno.id}"
 }
