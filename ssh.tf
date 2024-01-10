@@ -29,11 +29,15 @@ from_port = 22
   }
 }
 
-# Setting up an internet gateway
-//gateways.tf
-resource "aws_internet_gateway" "test-env-gw" {
+# Setting up route tables for the subnets
+//subnets.tf
+resource "aws_route_table" "route-table-blueteam" {
   vpc_id = "${aws_vpc.blueteam.id}"
-tags {
-    Name = "blueteam-gw"
+route {
+    cidr_block = "10.10.10.0/24"
   }
+}
+resource "aws_route_table_association" "subnet-association" {
+  subnet_id      = "${aws_subnet.subnet-uno.id}"
+  route_table_id = "${aws_route_table.route-table-blueteam.id}"
 }
