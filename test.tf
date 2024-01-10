@@ -21,7 +21,7 @@ name = "allow-all-sg"
 vpc_id = "${aws_vpc.blueteam.id}"
 ingress {
     cidr_blocks = [
-      "10.10.10.0/24"
+      "10.10.10.0/24" "10.0.0.9/24"
     ]
 from_port = 22
     to_port = 22
