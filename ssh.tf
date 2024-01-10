@@ -29,15 +29,16 @@ from_port = 22
   }
 }
 
-# This will launch the EC2 instance
-//servers.tf
-resource "aws_instance" "wesoBlue" {
-  ami = "${var.ami_id}"
-  instance_type = "t2.micro"
-  key_name = "${var.ami_key_pair_name}"
-  security_groups = ["${aws_security_group.ingress-all-test.id}"]
-tags {
-    Name = "${var.ami_name}"
+# This will attach an elastic ip to generate a public ip
+resource "aws_vpc" "blueteam" {
+  cidr_block = "10.0.0.0/16"
+  enable_dns_hostnames = true
+  enable_dns_support = true
+  tags {
+    Name = "blueteam"
   }
-subnet_id = "${aws_subnet.subnet-uno.id}"
+}
+resource "aws_eip" "ip-blueteam" {
+  instance = "${aws_instance.test-ec2-instance.id}"
+  vpc      = true
 }
