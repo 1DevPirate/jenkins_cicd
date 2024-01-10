@@ -6,6 +6,3 @@ resource "aws_vpc" "blueteam" {
   enable_dns_support = true
     Name = "blueteam"
   }
-}
-
-
