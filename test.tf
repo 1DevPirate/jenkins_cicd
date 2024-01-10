@@ -1,10 +1,3 @@
-# This will set up the provider
-//connections.tf
-provider "aws" {
-  region = "us-east-1"
-}
-
-
 # Setting up VPC
 //network.tf
 resource "aws_vpc" "blueteam" {
