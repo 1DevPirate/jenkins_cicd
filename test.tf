@@ -9,8 +9,8 @@ resource "aws_vpc" "blueteam" {
 # Setting up the subnets
 //subnets.tf
 resource "aws_subnet" "subnet-uno" {
-  cidr_block = "${cidrsubnet(aws_vpc.test-env.cidr_block, 3, 1)}"
-  vpc_id = "${aws_vpc.test-env.id}"
+  cidr_block = "${cidrsubnet(aws_vpc.blueteam.cidr_block, 3, 1)}"
+  vpc_id = "${aws_vpc.blueteam.id}"
   availability_zone = "us-east-1a"
 }
 
