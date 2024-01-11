@@ -1,6 +1,6 @@
 # this a test 
 resource "aws_security_group" "my_sg" {
-       name        = "blue-sg"
+       name        = "my_sg"
        description = "Some description"
        vpc_id      = "${aws_vpc.my_vpc.id}"
        tags {
