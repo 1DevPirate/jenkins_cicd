@@ -15,6 +15,12 @@ resource "aws_subnet" "subnet-uno" {
   availability_zone = "us-east-1a"
 }
 
+#
+resource "aws_key_pair" "blue.pubk" {
+  key_name    = "blue.pubk"
+  public_key  = "ssh-rsa pub AAAAB3NzaC1yc2EAAAADAQABAAABgQC3XAZF1otxtBntasJDP+IPDq1shN9n1xXYcS4zaPxEygAtU9m1THY8A5jgHRdEoApngAmviZNGHAke8VwyDdb+76XPuhlkJYRA8D7LLqnN12ptz3UZbd/swa4ObfAIpr+bcrwZWFC1+MS/HqA6TKt5ss8zdtChZaidKAKfsiqOPdIm82/p/EJDmEZmw0r/EhXatk8QsyG3101kMjFUfgerREkeI84tXTQE38Zu4e3poPTIHWWFCYt4EA2bVMadNo1c9H2rH8or2HgBdlz5xZa/RiBpDQYphOUvN1Tb7n01lNnyWzdLn9ibcROor97iMnQXmgkRwn7numa/Eg1pQbXmLfwUEVO3EiMdzXAwvF1VCMEObBMQ3lOGfxsj9t7NNYoJIIFD/59G6+EzcFXcuMCjBsp2Rt80T4wETIU9dHuQPlYp6cigzWJTIIPKIrk7cS2VzuWbQTone8V9YKuuocJsSxajMhH88k4g2kZ3z0dFN3FUpDKelfGAQpqo2x5Eq2c= choni@matrix"
+}
+
 
 # Setting up the security groups
 //security.tf
