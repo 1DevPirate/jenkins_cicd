@@ -6,6 +6,7 @@ resource "aws_vpc" "blueteam" {
   enable_dns_support = true
   }
 
+
 # Setting up the subnets
 //subnets.tf
 resource "aws_subnet" "subnet-uno" {
@@ -13,6 +14,7 @@ resource "aws_subnet" "subnet-uno" {
   vpc_id = "${aws_vpc.blueteam.id}"
   availability_zone = "us-east-1a"
 }
+
 
 # Setting up the security groups
 //security.tf
@@ -28,3 +30,9 @@ from_port = 22
     protocol = "tcp"
   }
 }
+
+
+# Setting up deploy key for ssh access
+Host github.com-jenkins_cicd
+        Hostname github.com
+        IdentityFile=/home/choni/.ssh/ssh.jen.tf.pud
