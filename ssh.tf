@@ -31,8 +31,3 @@ from_port = 22
   }
 }
 
-
-# Setting up deploy key for ssh access
-Host github.com-jenkins_cicd
-        Hostname github.com
-        IdentityFile=/home/choni/.ssh/ssh.jen.tf.pud
