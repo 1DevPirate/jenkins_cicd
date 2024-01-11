@@ -1,10 +1,10 @@
 # this a test 
-resource "aws_security_group" "my_sg" {
-       name        = "my_sg"
+resource "aws_security_group" "blue-sg" {
+       name        = "blue-sg"
        description = "Some description"
-       vpc_id      = "${aws_vpc.my_vpc.id}"
+       vpc_id      = "${aws_vpc.blueteam.id}"
        tags {
-         Name = "blue_sg_tag"
+         Name = "blue-sg_tag"
        }
 
        #Not redundant - Because a new security group has no inbound rules.
