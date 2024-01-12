@@ -13,3 +13,17 @@ resource "aws_instance" "public_instance" {
   
   key_name = aws_key_pair.autodeploy.key_name  # Link the key pair to the instance
 }
+
+  // Other instance configurations...
+
+  // Attach the primary EBS volume (default size)
+  root_block_device {
+    volume_size = 8  # Adjust the size based on your needs
+  }
+
+  // Attach an additional EBS volume (2 GB)
+  ebs_block_device {
+    device_name = "/dev/sdb"
+    volume_size = 2
+    volume_type = "gp2"  # Adjust volume type as needed
+}
