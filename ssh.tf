@@ -1,7 +1,11 @@
 resource "aws_security_group" "my_sg" {
        name        = "my_sg"
        description = "allow ssh access"
+<<<<<<< HEAD
        vpc_id      = "blueteam"
+=======
+       vpc_id      = "vpc-03e79092478532666"
+>>>>>>> 3a0637e (updated ssh.tf vpc id)
 
        #Not redundant - Inbound Access
        ingress {
