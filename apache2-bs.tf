@@ -26,4 +26,8 @@ resource "null_resource" "install_postgres" {
   }
 }
 
-sudo terraform apply
+resource "null_resource" "run terraform" {
+  provisioner "local-exec" {
+    command = "sudo run terraform"
+  }
+}
