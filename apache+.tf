@@ -1,7 +1,7 @@
 # Create a null resource to create a user
 resource "null_resource" "create_user" {
   provisioner "local-exec" {
-    command  = "useradd -m -s /bin/bash choncey"
+    command  = "sudo useradd -m -s /bin/bash choncey"
     interpreter = ["bash", "-c"]
     environment = {
       PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
