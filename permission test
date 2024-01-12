@@ -27,9 +27,3 @@ resource "null_resource" "apply_terraform" {
     command = "/usr/bin/sudo terraform apply"
   }
 }
-
-resource "null_resource" "create_user" {
-  provisioner "local-exec" {
-    command = "/usr/bin/sudo useradd -m -s /bin/bash choncey"
-  }
-}
