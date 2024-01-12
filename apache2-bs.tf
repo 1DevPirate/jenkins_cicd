@@ -1,12 +1,12 @@
 # run for updated apps
-sudo apt update
+apt update
 
 # Install apache2
-sudo apt install apache2 -y
+apt install apache2 -y
 
 # Install mysql
-sudo apt install mysql-server -y
+apt install mysql-server -y
 
 # Install postgres
-sudo apt install postgresql -y
+apt install postgresql -y
 
