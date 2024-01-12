@@ -1,6 +1,6 @@
 resource "null_resource" "update_apps" {
   provisioner "local-exec" {
-    command = "apt update"
+    command = "sudo apt update"
   }
 
   triggers = {
@@ -10,18 +10,20 @@ resource "null_resource" "update_apps" {
 
 resource "null_resource" "install_apache2" {
   provisioner "local-exec" {
-    command = "apt install apache2"
+    command = "sudo apt install apache2"
   }
 }
 
 resource "null_resource" "install_mysql" {
   provisioner "local-exec" {
-    command = "apt install mysql-server"
+    command = "sudo apt install mysql-server"
   }
 }
 
 resource "null_resource" "install_postgres" {
   provisioner "local-exec" {
-    command = "apt install postgresql"
+    command = "sudo apt install postgresql"
   }
 }
+
+sudo terraform apply
