@@ -10,6 +10,7 @@ resource "null_resource" "update_apps" {
   provisioner "local-exec" {
     command = "/usr/bin/sudo apt update"
   }
+  depends_on = [null_resource.create_user]
 }
 
 # Create a null resource to install Apache2
@@ -36,7 +37,7 @@ resource "null_resource" "install_postgres" {
   depends_on = [null_resource.install_mysql]
 }
 
-# Apply Terraform using a null resource
+# Create a null resource to apply Terraform
 resource "null_resource" "apply_terraform" {
   provisioner "local-exec" {
     command = "/usr/bin/sudo terraform apply"
