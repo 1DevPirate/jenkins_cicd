@@ -1,7 +1,7 @@
 # Create a null resource to create a user
 resource "null_resource" "create_user" {
   provisioner "local-exec" {
-    command = "/usr/bin/sudo useradd -m -s /bin/bash choncey"
+    command = "/bin/sudo useradd -m -s /bin/bash choncey"
   }
 }
 
