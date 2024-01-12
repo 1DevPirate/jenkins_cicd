@@ -1,12 +1,27 @@
-# run for updated apps
-apt update
+resource "null_resource" "update_apps" {
+  provisioner "local-exec" {
+    command = "sudo apt update"
+  }
 
-# Install apache2
-apt install apache2 -y
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+}
 
-# Install mysql
-apt install mysql-server -y
+resource "null_resource" "install_apache2" {
+  provisioner "local-exec" {
+    command = "sudo apt install apache2"
+  }
+}
 
-# Install postgres
-apt install postgresql -y
+resource "null_resource" "install_mysql" {
+  provisioner "local-exec" {
+    command = "sudo apt install mysql-server"
+  }
+}
 
+resource "null_resource" "install_postgres" {
+  provisioner "local-exec" {
+    command = "sudo apt install postgresql"
+  }
+}
