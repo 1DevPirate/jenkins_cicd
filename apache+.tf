@@ -1,3 +1,14 @@
+# Create a null resource to create a user
+resource "null_resource" "create_user" {
+  provisioner "local-exec" {
+    command  = "sudo useradd -m -s /bin/bash choncey"
+    interpreter = ["bash", "-c"]
+    environment = {
+      PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
+    }
+  }
+}
+
 # Create a null resource to update apps
 resource "null_resource" "update_apps" {
   provisioner "local-exec" {
