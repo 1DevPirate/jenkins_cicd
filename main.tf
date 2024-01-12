@@ -6,13 +6,7 @@ resource "aws_key_pair" "autodeploy" {
 resource "aws_instance" "public_instance" {
   ami           = var.ami
   instance_type = var.instance_type
-
-  tags = {
-    Name = var.name_tag,
-  }
-  
   key_name = aws_key_pair.autodeploy.key_name  # Link the key pair to the instance
-}
 
   // Other instance configurations...
 
