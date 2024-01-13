@@ -51,18 +51,8 @@ resource "null_resource" "install_sudo" {
   }
 
   provisioner "local-exec" {
-    command  = "apt-get update && apt-get install -y sudo"
+    command  = "apt-get install -y sudo"
     interpreter = ["bash", "-c"]
     when = 'create'
-  }
-}
-
-# Create a null resource to update apps
-resource "null_resource" "update_apps" {
-  depends_on = [null_resource.install_sudo]
-
-  provisioner "local-exec" {
-    command  = "/usr/bin/sudo apt update"
-    interpreter = ["bash", "-c"]
   }
 }
