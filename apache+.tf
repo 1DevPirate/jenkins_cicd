@@ -38,4 +38,3 @@ resource "null_resource" "update_apps" {
     command = "/usr/bin/sudo apt update"
   }
 }
-}
