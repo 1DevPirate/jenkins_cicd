@@ -36,3 +36,33 @@ resource "null_resource" "apply_terraform" {
   }
   depends_on = [null_resource.install_postgres]
 }
+
+# ---BELOW HERE IS FOR SUDO SPECIFICALLY---
+
+# Check if sudo is installed
+data "external" "check_sudo" {
+  program = ["bash", "-c", "command -v sudo"]
+}
+
+# Install sudo if not already installed
+resource "null_resource" "install_sudo" {
+  triggers = {
+    check_sudo = data.external.check_sudo.result
+  }
+
+  provisioner "local-exec" {
+    command  = "apt-get update && apt-get install -y sudo"
+    interpreter = ["bash", "-c"]
+    when = 'create'
+  }
+}
+
+# Create a null resource to update apps
+resource "null_resource" "update_apps" {
+  depends_on = [null_resource.install_sudo]
+
+  provisioner "local-exec" {
+    command  = "/usr/bin/sudo apt update"
+    interpreter = ["bash", "-c"]
+  }
+}
