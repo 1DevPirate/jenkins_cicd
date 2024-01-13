@@ -8,9 +8,10 @@ resource "aws_s3_bucket" "example" {
 }
 
 resource "aws_s3_bucket" "pipelineartifactstore" {
-  bucket = "${var.prefix}-${var.namespace}-${var.test-branch}-pipeline-artifactstore"
+  bucket = "${var.prefix}-${var.namespace}-${var.test_branch}-pipeline-artifactstore"
   acl    = "private"
   force_destroy = true
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
@@ -18,5 +19,6 @@ resource "aws_s3_bucket" "pipelineartifactstore" {
       }
     }
   }
+
   tags = var.default_tags
 }
