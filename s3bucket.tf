@@ -1,7 +1,21 @@
-resource "aws_s3_bucket" "example" {
-  bucket = "my-tf-s3-bucket"
+variable "prefix" {
+  type    = string
+  default = "my-prefix"
+}
 
-  tags = {
+variable "namespace" {
+  type    = string
+  default = "my-namespace"
+}
+
+variable "test_branch" {
+  type    = string
+  default = "my-test-branch"
+}
+
+variable "default_tags" {
+  type = map(string)
+  default = {
     Name        = "My bucket"
     Environment = "test-branch"
   }
