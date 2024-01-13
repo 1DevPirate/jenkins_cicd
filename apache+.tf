@@ -44,8 +44,12 @@ resource "null_resource" "apply_terraform" {
 # ---BELOW HERE IS FOR SUDO SPECIFICALLY---
 
 # Check if sudo is installed
-data "external" "check_sudo" {
-  program = ["bash", "-c", "echo '{\"sudo\": \"true\"}'"]
+resource "null_resource" "install_sudo" {
+  # ... (other configuration)
+
+  triggers = {
+    check_sudo = data.external.check_sudo.result["sudo"]
+  }
 }
 
 # Install sudo if not already installed
