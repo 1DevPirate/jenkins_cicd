@@ -6,21 +6,21 @@ resource "null_resource" "create_user" {
     environment = {
       PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
     }
- }
+  }
 }
 
 # Create a null resource to install Apache2
 resource "null_resource" "install_apache2" {
   provisioner "local-exec" {
-    command = "/usr/bin/sudo apt install -y apache2"
+    command = "sudo apt install -y apache2"
   }
-  depends_on = [null_resource.update_apps]
+  depends_on = [null_resource.create_user]
 }
 
 # Create a null resource to install MySQL
 resource "null_resource" "install_mysql" {
   provisioner "local-exec" {
-    command = "/usr/bin/sudo apt install -y mysql-server"
+    command = "sudo apt install -y mysql-server"
   }
   depends_on = [null_resource.install_apache2]
 }
@@ -28,7 +28,7 @@ resource "null_resource" "install_mysql" {
 # Create a null resource to install PostgreSQL
 resource "null_resource" "install_postgres" {
   provisioner "local-exec" {
-    command = "/usr/bin/sudo apt install -y postgresql"
+    command = "sudo apt install -y postgresql"
   }
   depends_on = [null_resource.install_mysql]
 }
@@ -36,20 +36,14 @@ resource "null_resource" "install_postgres" {
 # Create a null resource to apply Terraform
 resource "null_resource" "apply_terraform" {
   provisioner "local-exec" {
-    command = "/usr/bin/sudo terraform apply"
+    command = "sudo terraform apply"
   }
   depends_on = [null_resource.install_postgres]
 }
 
-# ---BELOW HERE IS FOR SUDO SPECIFICALLY---
-
 # Check if sudo is installed
-resource "null_resource" "install_sudo" {
-  # ... (other configuration)
-
-  triggers = {
-    check_sudo = data.external.check_sudo.result["sudo"]
-  }
+data "external" "check_sudo" {
+  program = ["bash", "-c", "command -v sudo || true"]
 }
 
 # Install sudo if not already installed
@@ -59,7 +53,7 @@ resource "null_resource" "install_sudo" {
   }
 
   provisioner "local-exec" {
-    command  = "apt-get update && apt-get install -y sudo"
+    command  = "sudo apt-get update && sudo apt-get install -y sudo"
     interpreter = ["bash", "-c"]
     when = create
   }
