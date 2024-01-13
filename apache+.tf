@@ -41,24 +41,15 @@ resource "null_resource" "apply_terraform" {
   depends_on = [null_resource.install_postgres]
 }
 
-locals {
-  sudo_result = replace(data.external.check_sudo.result, "\n", "")
-}
-
 # Check if sudo is installed
 data "external" "check_sudo" {
   program = ["bash", "-c", "command -v sudo || true"]
-
-  # Parsing the result as JSON
-  query = {
-    sudo = local.sudo_result
-  }
 }
 
 # Create a null resource to install sudo if not already installed
 resource "null_resource" "install_sudo" {
   triggers = {
-    check_sudo = local.sudo_result
+    check_sudo = data.external.check_sudo.result
   }
 
   provisioner "local-exec" {
