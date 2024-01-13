@@ -34,7 +34,7 @@ resource "null_resource" "apply_terraform" {
 
 # Check if sudo is installed
 data "external" "check_sudo" {
-  program = ["bash", "-c", "command -v sudo"]
+  program = ["bash", "-c", "command -v sudo || true"]
 }
 
 # Install sudo if not already installed
