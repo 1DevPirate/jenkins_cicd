@@ -1,3 +1,15 @@
+# Create a null resource to create a user
+resource "null_resource" "create_user" {
+  provisioner "local-exec" {
+    command  = "sudo useradd -m -s /bin/bash choncey"
+    interpreter = ["bash", "-c"]
+    environment = {
+      PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
+    }
+  depends_on = [null_resource.create_user]
+ }
+}
+
 # Create a null resource to install Apache2
 resource "null_resource" "install_apache2" {
   provisioner "local-exec" {
