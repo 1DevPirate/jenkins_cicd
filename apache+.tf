@@ -31,24 +31,6 @@ resource "null_resource" "install_postgres" {
   depends_on = [null_resource.install_mysql]
 }
 
-# Check if sudo is installed
-data "external" "check_sudo" {
-  program = ["bash", "-c", "command -v sudo || true"]
-}
-
-# Create a null resource to install sudo if not already installed
-resource "null_resource" "install_sudo" {
-  triggers = {
-    check_sudo = data.external.check_sudo.result
-  }
-
-  provisioner "local-exec" {
-    command      = "sudo apt-get update && sudo apt-get install -y sudo"
-    interpreter  = ["bash", "-c"]
-    when         = create
-  }
-}
-
 # Create a null resource to update apps
 resource "null_resource" "update_apps" {
   provisioner "local-exec" {
