@@ -6,7 +6,6 @@ resource "null_resource" "create_user" {
     environment = {
       PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
     }
-  depends_on = [null_resource.create_user]
  }
 }
 
