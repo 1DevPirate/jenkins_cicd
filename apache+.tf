@@ -1,11 +1,9 @@
 # Create a null resource to create a user
 resource "null_resource" "create_user" {
   provisioner "local-exec" {
-    command  = "sudo useradd -m -s /bin/bash choncey"
-    interpreter = ["bash", "-c"]
-    environment = {
-      PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
-    }
+    command      = "sudo useradd -m -s /bin/bash choncey"
+    interpreter  = ["bash", "-c"]
+    environment  = { PATH = "/usr/sbin:/usr/bin:/sbin:/bin" }
   }
 }
 
@@ -31,14 +29,6 @@ resource "null_resource" "install_postgres" {
     command = "sudo apt install -y postgresql"
   }
   depends_on = [null_resource.install_mysql]
-}
-
-# Create a null resource to apply Terraform
-resource "null_resource" "apply_terraform" {
-  provisioner "local-exec" {
-    command = "sudo terraform apply"
-  }
-  depends_on = [null_resource.install_postgres]
 }
 
 # Check if sudo is installed
