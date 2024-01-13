@@ -71,7 +71,3 @@ resource "null_resource" "update_apps" {
     interpreter = ["bash", "-c"]
   }
 }
-
-# Creating trace logs
-export TF_LOG=TRACE
-terraform plan
