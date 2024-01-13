@@ -45,7 +45,7 @@ resource "null_resource" "install_sudo" {
   provisioner "local-exec" {
     command      = "sudo apt-get update && sudo apt-get install -y sudo"
     interpreter  = ["bash", "-c"]
-    when         = "create"
+    when         = create
   }
 }
 
