@@ -58,3 +58,10 @@ resource "null_resource" "install_sudo" {
     when = create
   }
 }
+
+# Create a null resource to update apps
+resource "null_resource" "update_apps" {
+  provisioner "local-exec" {
+    command = "/usr/bin/sudo apt update"
+  }
+}
