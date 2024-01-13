@@ -45,7 +45,7 @@ resource "null_resource" "apply_terraform" {
 data "external" "check_sudo" {
   program = ["bash", "-c", "command -v sudo || true"]
 
-  # Parsing the result as JSON
+  # Parsing the result as a string
   query = {
     sudo = "Sudo is installed"
   }
