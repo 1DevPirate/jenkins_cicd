@@ -55,16 +55,16 @@ data "external" "check_sudo" {
   }
 }
 
-# Install sudo if not already installed
+# Create a null resource to install sudo if not already installed
 resource "null_resource" "install_sudo" {
   triggers = {
-    check_sudo = data.external.check_sudo.result
+    check_sudo = local.sudo_result
   }
 
   provisioner "local-exec" {
-    command  = "sudo apt-get update && sudo apt-get install -y sudo"
-    interpreter = ["bash", "-c"]
-    when = create
+    command      = "sudo apt-get update && sudo apt-get install -y sudo"
+    interpreter  = ["bash", "-c"]
+    when         = "create"
   }
 }
 
