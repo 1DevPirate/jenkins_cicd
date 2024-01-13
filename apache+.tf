@@ -45,12 +45,9 @@ resource "null_resource" "apply_terraform" {
 data "external" "check_sudo" {
   program = ["bash", "-c", "command -v sudo || true"]
 
-  # Store the result in a local variable
-  result = replace(data.external.check_sudo.result, "\n", "")
-
   # Parsing the result as JSON
   query = {
-    sudo = local.result
+    sudo = replace(data.external.check_sudo.result, "\n", "")
   }
 }
 
