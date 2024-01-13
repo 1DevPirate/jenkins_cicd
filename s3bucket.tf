@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "example" {
 }
 
 resource "aws_s3_bucket" "pipelineartifactstore" {
-  bucket = "${var.prefix}-${var.namespace}-${var.stage}-pipeline-artifactstore"
+  bucket = "${var.prefix}-${var.namespace}-${var.test-branch}-pipeline-artifactstore"
   acl    = "private"
   force_destroy = true
   server_side_encryption_configuration {
