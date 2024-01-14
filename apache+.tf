@@ -1,24 +1,24 @@
-# Create a null resource to create a user
-resource "null_resource" "create_user" {
-  provisioner "local-exec" {
-    command      = "/usr/bin/sudo useradd -m -s /bin/bash choncey"
-    interpreter  = ["bash", "-c"]
-    environment  = { PATH = "/usr/sbin:/usr/bin:/sbin:/bin" }
-  }
-}
-
 # Create a null resource to install Apache2
 resource "null_resource" "install_apache2" {
   provisioner "local-exec" {
-    command = "/usr/bin/sudo apt install -y apache2"
+    command     = "/usr/bin/sudo apt install -y apache2"
+    interpreter = ["bash", "-c"]
   }
-  depends_on = [null_resource.create_user]
+}
+
+# Create a null resource to update apps
+resource "null_resource" "update_apps" {
+  provisioner "local-exec" {
+    command     = "/usr/bin/sudo apt update"
+    interpreter = ["bash", "-c"]
+  }
 }
 
 # Create a null resource to install MySQL
 resource "null_resource" "install_mysql" {
   provisioner "local-exec" {
-    command = "/usr/bin/sudo apt install -y mysql-server"
+    command     = "/usr/bin/sudo apt install -y mysql-server"
+    interpreter = ["bash", "-c"]
   }
   depends_on = [null_resource.install_apache2]
 }
@@ -26,14 +26,8 @@ resource "null_resource" "install_mysql" {
 # Create a null resource to install PostgreSQL
 resource "null_resource" "install_postgres" {
   provisioner "local-exec" {
-    command = "/usr/bin/sudo apt install -y postgresql"
+    command     = "/usr/bin/sudo apt install -y postgresql"
+    interpreter = ["bash", "-c"]
   }
   depends_on = [null_resource.install_mysql]
-}
-
-# Create a null resource to update apps
-resource "null_resource" "update_apps" {
-  provisioner "local-exec" {
-    command = "/usr/bin/sudo apt update"
-  }
 }
